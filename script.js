@@ -98,7 +98,7 @@ const movies = [
         year: 2019,
         rating: 8.5,
         description: "Greed and class discrimination threaten the newly formed symbiotic relationship between the wealthy Park family.",
-        poster: "https://image.tmdb.org/t/p/original/9PSifrJfKl8sy9tBOd5Vcg0jbN6.jpg",
+        poster: "https://images.unsplash.com/photo-1574267432644-f610a52f60e9?w=500&q=80",
         progress: 12,
         featured: true
     },
