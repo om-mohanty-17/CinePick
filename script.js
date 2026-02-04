@@ -123,6 +123,9 @@ const movies = [
 
 const moviesGrid = document.getElementById('moviesGrid');
 const filterButtons = document.querySelectorAll('.filter-btn');
+const featuredCarousel = document.getElementById('featuredCarousel');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
 
 // ==================== //
 // Render Movies Function
@@ -158,6 +161,64 @@ function renderMovies(moviesToRender) {
         
         moviesGrid.appendChild(movieCard);
     });
+}
+
+// ==================== //
+// Carousel Functions
+// ==================== //
+
+let currentSlide = 0;
+let autoScrollInterval;
+const slideWidth = 315; // card width (300px) + gap (15px)
+
+function renderCarousel() {
+    // Select first 8 movies for featured carousel
+    const featuredMovies = movies.slice(0, 8);
+    
+    featuredCarousel.innerHTML = '';
+    
+    featuredMovies.forEach(movie => {
+        const carouselCard = document.createElement('div');
+        carouselCard.className = 'carousel-card';
+        
+        carouselCard.innerHTML = `
+            <div class="carousel-poster">
+                <img src="${movie.poster}" alt="${movie.title}" loading="lazy">
+            </div>
+            <div class="carousel-info">
+                <h3 class="carousel-title">${movie.title}</h3>
+                <div class="carousel-meta">
+                    <span class="carousel-genre">${movie.genre}</span>
+                    <span>•</span>
+                    <span>${movie.year}</span>
+                </div>
+            </div>
+        `;
+        
+        featuredCarousel.appendChild(carouselCard);
+    });
+}
+
+function scrollCarousel(direction) {
+    const maxSlide = Math.max(0, featuredCarousel.children.length - Math.floor(featuredCarousel.parentElement.offsetWidth / slideWidth));
+    
+    if (direction === 'next') {
+        currentSlide = currentSlide >= maxSlide ? 0 : currentSlide + 1;
+    } else {
+        currentSlide = currentSlide <= 0 ? maxSlide : currentSlide - 1;
+    }
+    
+    featuredCarousel.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
+}
+
+function startAutoScroll() {
+    autoScrollInterval = setInterval(() => {
+        scrollCarousel('next');
+    }, 3000); // Auto-scroll every 3 seconds
+}
+
+function stopAutoScroll() {
+    clearInterval(autoScrollInterval);
 }
 
 // ==================== //
@@ -215,8 +276,31 @@ document.addEventListener('DOMContentLoaded', () => {
     // Add smooth transition properties to movies grid
     moviesGrid.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
     
+    // Render carousel
+    renderCarousel();
+    
     // Render all movies initially
     renderMovies(movies);
+    
+    // Start auto-scroll
+    startAutoScroll();
+    
+    // Pause auto-scroll on hover
+    featuredCarousel.parentElement.addEventListener('mouseenter', stopAutoScroll);
+    featuredCarousel.parentElement.addEventListener('mouseleave', startAutoScroll);
+});
+
+// Carousel Navigation Buttons
+prevBtn.addEventListener('click', () => {
+    stopAutoScroll();
+    scrollCarousel('prev');
+    startAutoScroll();
+});
+
+nextBtn.addEventListener('click', () => {
+    stopAutoScroll();
+    scrollCarousel('next');
+    startAutoScroll();
 });
 
 // ==================== //
