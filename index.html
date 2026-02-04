@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CinePicks - Cinema Club IIT Roorkee</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="film-reel">
+                    <span class="reel-dot"></span>
+                    <span class="reel-dot"></span>
+                    <span class="reel-dot"></span>
+                </div>
+                <h1 class="title">CinePicks</h1>
+            </div>
+            <p class="tagline">Curated Cinema for the Discerning Mind</p>
+            <p class="subtitle">Cinema Club, IIT Roorkee</p>
+        </div>
+        <div class="header-decoration"></div>
+    </header>
+
+    <!-- Filter Section -->
+    <section class="filter-section">
+        <div class="container">
+            <h2 class="filter-title">Explore by Genre</h2>
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-genre="all">All Movies</button>
+                <button class="filter-btn" data-genre="drama">Drama</button>
+                <button class="filter-btn" data-genre="thriller">Thriller</button>
+                <button class="filter-btn" data-genre="sci-fi">Sci-Fi</button>
+                <button class="filter-btn" data-genre="action">Action</button>
+                <button class="filter-btn" data-genre="comedy">Comedy</button>
+                <button class="filter-btn" data-genre="animation">Animation</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Movies Section -->
+    <section class="movies-section">
+        <div class="container">
+            <div class="movies-grid" id="moviesGrid">
+                <!-- Movie cards will be dynamically inserted here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Cinema Club, IIT Roorkee. All rights reserved.</p>
+            <p class="footer-tagline">Where Stories Come Alive</p>
+        </div>
+    </footer>
+
+    <script src="/script.js"></script>
+</body>
+</html>
