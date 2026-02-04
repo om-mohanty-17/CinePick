@@ -10,12 +10,24 @@
     <!-- Sidebar -->
     <aside class="sidebar">
         <div class="logo">
-            <svg class="logo-icon" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="5" y="10" width="40" height="30" rx="3" stroke="#E74C3C" stroke-width="2.5" fill="none"/>
-                <circle cx="25" cy="25" r="8" fill="#E74C3C"/>
-                <path d="M25 17L28 22L33 23L29 27L30 32L25 29L20 32L21 27L17 23L22 22L25 17Z" fill="#FFF"/>
-                <rect x="10" y="5" width="6" height="8" rx="1" fill="#E74C3C"/>
-                <rect x="34" y="5" width="6" height="8" rx="1" fill="#E74C3C"/>
+            <svg class="logo-icon" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Film reel outer circle -->
+                <circle cx="30" cy="30" r="26" stroke="#E74C3C" stroke-width="2" fill="none"/>
+                <circle cx="30" cy="30" r="22" fill="#E74C3C" opacity="0.1"/>
+                
+                <!-- Center play button -->
+                <circle cx="30" cy="30" r="12" fill="#E74C3C"/>
+                <path d="M27 24L37 30L27 36V24Z" fill="#FFF"/>
+                
+                <!-- Film holes around the circle -->
+                <circle cx="30" cy="4" r="3" fill="#E74C3C"/>
+                <circle cx="30" cy="56" r="3" fill="#E74C3C"/>
+                <circle cx="4" cy="30" r="3" fill="#E74C3C"/>
+                <circle cx="56" cy="30" r="3" fill="#E74C3C"/>
+                <circle cx="12" cy="12" r="2.5" fill="#E74C3C" opacity="0.6"/>
+                <circle cx="48" cy="12" r="2.5" fill="#E74C3C" opacity="0.6"/>
+                <circle cx="12" cy="48" r="2.5" fill="#E74C3C" opacity="0.6"/>
+                <circle cx="48" cy="48" r="2.5" fill="#E74C3C" opacity="0.6"/>
             </svg>
             <div class="logo-text-container">
                 <span class="logo-text">CinePicks</span>
@@ -152,6 +164,30 @@
             <div class="continue-carousel-wrapper">
                 <div class="continue-carousel" id="continueCarousel">
                     <!-- Continue watching cards will be inserted by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Recommended For You Section (Auto-scrolling like Netflix) -->
+        <section class="recommendations-section">
+            <div class="section-header">
+                <h2>Recommended For You</h2>
+                <div class="section-controls">
+                    <button class="carousel-control prev" id="recommendPrev">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+                        </svg>
+                    </button>
+                    <button class="carousel-control next" id="recommendNext">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="recommendations-carousel-wrapper">
+                <div class="recommendations-carousel" id="recommendationsCarousel">
+                    <!-- Recommendation cards will be inserted by JavaScript -->
                 </div>
             </div>
         </section>

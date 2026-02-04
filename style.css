@@ -114,14 +114,19 @@ body {
     align-items: center;
     gap: 15px;
     animation: slideIn 0.6s ease-out;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.logo:hover {
+    transform: scale(1.02);
 }
 
 .logo-icon {
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
     flex-shrink: 0;
-    filter: drop-shadow(0 0 10px rgba(231, 76, 60, 0.3));
-    animation: pulse 2s ease-in-out infinite;
+    filter: drop-shadow(0 0 15px rgba(231, 76, 60, 0.4));
 }
 
 .logo-text-container {
@@ -131,17 +136,21 @@ body {
 }
 
 .logo-text {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     font-weight: 800;
     color: var(--text-primary);
     letter-spacing: -0.5px;
+    background: linear-gradient(135deg, #fff 0%, #E74C3C 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .logo-subtitle {
-    font-size: 0.7rem;
-    color: var(--primary-red);
+    font-size: 0.65rem;
+    color: var(--text-secondary);
     text-transform: uppercase;
-    letter-spacing: 1.5px;
+    letter-spacing: 2px;
     font-weight: 600;
 }
 
@@ -577,6 +586,126 @@ body {
 }
 
 /* ==================== */
+/* Recommendations Section (Netflix-style auto-scroll) */
+/* ==================== */
+
+.recommendations-section {
+    padding: 50px 40px;
+    background: var(--dark-bg);
+    animation: fadeIn 1.1s ease-out;
+}
+
+.recommendations-carousel-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+.recommendations-carousel {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding-bottom: 10px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.recommendations-carousel::-webkit-scrollbar {
+    display: none;
+}
+
+.recommend-card {
+    flex: 0 0 280px;
+    background: var(--card-bg);
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    animation: scaleIn 0.5s ease-out backwards;
+}
+
+.recommend-card:hover {
+    transform: scale(1.05);
+    border-color: var(--primary-red);
+    box-shadow: 0 10px 30px rgba(231, 76, 60, 0.3);
+    z-index: 10;
+}
+
+.recommend-poster {
+    width: 100%;
+    aspect-ratio: 16/9;
+    position: relative;
+    overflow: hidden;
+    background: var(--darker-bg);
+}
+
+.recommend-poster img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.4s ease;
+}
+
+.recommend-card:hover .recommend-poster img {
+    transform: scale(1.1);
+}
+
+.recommend-info {
+    padding: 15px;
+}
+
+.recommend-title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--text-primary);
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.recommend-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.recommend-rating {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: var(--rating-yellow);
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.recommend-rating svg {
+    width: 14px;
+    height: 14px;
+}
+
+.recommend-year {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.recommend-description {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* ==================== */
 /* Continue Watching Section */
 /* ==================== */
 
@@ -693,15 +822,17 @@ body {
 
 .continue-poster {
     width: 100%;
-    height: 200px;
+    aspect-ratio: 16/9;
     position: relative;
     overflow: hidden;
+    background: var(--darker-bg);
 }
 
 .continue-poster img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
     transition: transform 0.4s ease;
 }
 
@@ -822,15 +953,17 @@ body {
 
 .movie-poster {
     width: 100%;
-    height: 320px;
+    aspect-ratio: 2/3;
     position: relative;
     overflow: hidden;
+    background: var(--darker-bg);
 }
 
 .movie-poster img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
     transition: transform 0.4s ease;
 }
 
@@ -1191,4 +1324,704 @@ body {
     background: linear-gradient(90deg, var(--card-bg) 0%, var(--darker-bg) 50%, var(--card-bg) 100%);
     background-size: 200% 100%;
     animation: shimmer 1.5s infinite;
+}
+
+/* Additional iPad and mobile optimizations */
+@media (max-width: 1023px) and (min-width: 768px) {
+    .continue-card,
+    .recommend-card {
+        flex: 0 0 260px;
+    }
+    
+    .recommendations-section,
+    .continue-section {
+        padding: 40px 30px;
+    }
+}
+
+@media (max-width: 767px) and (min-width: 600px) {
+    .continue-card,
+    .recommend-card {
+        flex: 0 0 240px;
+    }
+}
+
+@media (max-width: 599px) {
+    .continue-card,
+    .recommend-card {
+        flex: 0 0 200px;
+    }
+    
+    .recommendations-section {
+        padding: 25px 15px;
+    }
+}
+
+/* Fix for aspect ratio on mobile */
+@media (max-width: 480px) {
+    .movie-poster {
+        aspect-ratio: 2/3;
+        height: auto;
+    }
+}
+/* Hero Enhancements */
+.hero-background-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.hero-year,
+.hero-genre {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-secondary);
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.hero-year svg,
+.hero-genre svg {
+    width: 16px;
+    height: 16px;
+}
+
+.add-to-watchlist-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 30px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.add-to-watchlist-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
+}
+
+.add-to-watchlist-btn svg,
+.watch-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+.hero-indicators {
+    position: absolute;
+    bottom: 30px;
+    right: 60px;
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+}
+
+.hero-indicator {
+    width: 40px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.3);
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.hero-indicator.active {
+    background: var(--primary-red);
+    width: 60px;
+}
+
+.hero-indicator:hover {
+    background: rgba(255, 255, 255, 0.6);
+}
+
+/* Play Overlay for Cards */
+.play-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.play-overlay svg {
+    width: 60px;
+    height: 60px;
+    color: white;
+}
+
+.continue-card:hover .play-overlay,
+.movie-card:hover .play-overlay,
+.recommend-card:hover .play-overlay {
+    opacity: 1;
+}
+
+/* Continue Info */
+.continue-info,
+.recommend-info {
+    padding: 15px;
+    background: var(--card-bg);
+}
+
+.continue-info h4,
+.recommend-info h4 {
+    font-size: 1.05rem;
+    margin-bottom: 5px;
+    color: var(--text-primary);
+}
+
+.continue-info p,
+.recommend-info p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+/* Empty Message */
+.empty-message {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    text-align: center;
+    padding: 60px 20px;
+}
+
+/* Profile View */
+.profile-view {
+    animation: fadeIn 0.6s ease;
+}
+
+/* Accessibility */
+button:focus,
+a:focus {
+    outline: 2px solid var(--primary-red);
+    outline-offset: 2px;
+}
+
+/* Loading States */
+.loading {
+    display: inline-block;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* Smooth Transitions */
+.hero-section,
+.continue-section,
+.recommendations-section,
+.all-movies-section {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Additional Mobile Optimizations */
+@media (max-width: 768px) {
+    .hero-indicators {
+        bottom: 15px;
+        right: 20px;
+    }
+    
+    .hero-indicator {
+        width: 30px;
+        height: 3px;
+    }
+    
+    .hero-indicator.active {
+        width: 45px;
+    }
+    
+    .add-to-watchlist-btn {
+        padding: 12px 20px;
+        font-size: 0.9rem;
+    }
+}
+/* RESPONSIVE FIXES - Add to end of style.css or use as override */
+
+/* Main Layout Fixes */
+.sidebar {
+    width: 240px !important;
+}
+
+.main-content {
+    margin-left: 240px !important;
+    width: calc(100% - 240px) !important;
+}
+
+/* Hero Section Fixes */
+.hero-section {
+    height: 450px !important;
+    max-width: 100%;
+}
+
+.hero-content {
+    max-width: 50% !important;
+    padding: 40px !important;
+}
+
+.hero-title {
+    font-size: 2.8rem !important;
+}
+
+/* Section Padding Fixes */
+.continue-section,
+.recommendations-section,
+.all-movies-section {
+    padding: 40px 30px !important;
+}
+
+/* Carousel Fixes */
+.continue-carousel,
+.recommendations-carousel {
+    gap: 15px !important;
+}
+
+.continue-card,
+.recommend-card {
+    min-width: 280px !important;
+    max-width: 280px !important;
+}
+
+/* Grid Fixes */
+.movies-grid {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)) !important;
+    gap: 20px !important;
+}
+
+/* Top Bar Fixes */
+.top-bar {
+    padding: 15px 30px !important;
+}
+
+.search-bar {
+    max-width: 400px !important;
+}
+
+/* Footer Fixes */
+.footer {
+    padding: 40px 30px 25px !important;
+}
+
+/* Desktop (1920px) */
+@media (min-width: 1920px) {
+    .sidebar {
+        width: 260px !important;
+    }
+    
+    .main-content {
+        margin-left: 260px !important;
+        width: calc(100% - 260px) !important;
+    }
+    
+    .hero-content {
+        max-width: 45% !important;
+        padding: 60px !important;
+    }
+    
+    .hero-title {
+        font-size: 3.5rem !important;
+    }
+    
+    .movies-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)) !important;
+    }
+}
+
+/* Laptop (1366px - 1920px) */
+@media (max-width: 1600px) {
+    .sidebar {
+        width: 220px !important;
+    }
+    
+    .main-content {
+        margin-left: 220px !important;
+        width: calc(100% - 220px) !important;
+    }
+    
+    .hero-section {
+        height: 400px !important;
+    }
+    
+    .hero-content {
+        padding: 35px !important;
+    }
+    
+    .hero-title {
+        font-size: 2.5rem !important;
+    }
+    
+    .movies-grid {
+        grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)) !important;
+    }
+}
+
+/* Standard Laptop (1024px - 1366px) */
+@media (max-width: 1366px) {
+    .sidebar {
+        width: 200px !important;
+    }
+    
+    .main-content {
+        margin-left: 200px !important;
+        width: calc(100% - 200px) !important;
+    }
+    
+    .hero-section {
+        height: 380px !important;
+    }
+    
+    .hero-title {
+        font-size: 2.2rem !important;
+    }
+    
+    .continue-card,
+    .recommend-card {
+        min-width: 250px !important;
+        max-width: 250px !important;
+    }
+    
+    .movies-grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)) !important;
+    }
+}
+
+/* Tablet Portrait & Small Laptop (768px - 1024px) */
+@media (max-width: 1024px) {
+    .sidebar {
+        width: 240px !important;
+        transform: translateX(-100%);
+    }
+    
+    .sidebar.active {
+        transform: translateX(0);
+    }
+    
+    .main-content {
+        margin-left: 0 !important;
+        width: 100% !important;
+    }
+    
+    .hamburger-btn {
+        display: flex !important;
+    }
+    
+    .hero-section {
+        height: 350px !important;
+    }
+    
+    .hero-content {
+        max-width: 60% !important;
+        padding: 30px !important;
+    }
+    
+    .hero-title {
+        font-size: 2rem !important;
+    }
+    
+    .hero-description {
+        font-size: 0.95rem !important;
+    }
+    
+    .continue-section,
+    .recommendations-section,
+    .all-movies-section {
+        padding: 30px 25px !important;
+    }
+    
+    .movies-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)) !important;
+        gap: 15px !important;
+    }
+    
+    .nav-arrows {
+        display: none !important;
+    }
+}
+
+/* Mobile Landscape & Tablet Portrait (600px - 768px) */
+@media (max-width: 768px) {
+    .hero-section {
+        height: 320px !important;
+    }
+    
+    .hero-content {
+        max-width: 70% !important;
+        padding: 25px !important;
+    }
+    
+    .hero-title {
+        font-size: 1.8rem !important;
+    }
+    
+    .hero-meta {
+        flex-wrap: wrap;
+        gap: 10px !important;
+    }
+    
+    .hero-actions {
+        flex-direction: column;
+        gap: 10px !important;
+    }
+    
+    .watch-btn,
+    .add-to-watchlist-btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .hero-indicators {
+        bottom: 15px !important;
+        right: 25px !important;
+    }
+    
+    .continue-card,
+    .recommend-card {
+        min-width: 220px !important;
+        max-width: 220px !important;
+    }
+    
+    .continue-section,
+    .recommendations-section,
+    .all-movies-section {
+        padding: 25px 20px !important;
+    }
+    
+    .movies-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)) !important;
+    }
+    
+    .top-bar {
+        padding: 12px 20px !important;
+    }
+    
+    .search-bar {
+        max-width: 300px !important;
+        margin: 0 15px !important;
+    }
+    
+    .footer-links {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+
+/* Mobile Portrait (480px - 600px) */
+@media (max-width: 600px) {
+    .hero-section {
+        height: 280px !important;
+    }
+    
+    .hero-content {
+        max-width: 85% !important;
+        padding: 20px !important;
+    }
+    
+    .hero-title {
+        font-size: 1.5rem !important;
+    }
+    
+    .hero-description {
+        font-size: 0.85rem !important;
+        margin-bottom: 15px !important;
+    }
+    
+    .imdb-rating,
+    .hero-year,
+    .hero-genre {
+        font-size: 0.8rem !important;
+        padding: 4px 8px !important;
+    }
+    
+    .watch-btn,
+    .add-to-watchlist-btn {
+        padding: 12px 20px !important;
+        font-size: 0.9rem !important;
+    }
+    
+    .hero-indicators {
+        bottom: 10px !important;
+        right: 20px !important;
+    }
+    
+    .hero-indicator {
+        width: 25px !important;
+        height: 3px !important;
+    }
+    
+    .hero-indicator.active {
+        width: 40px !important;
+    }
+    
+    .continue-card,
+    .recommend-card {
+        min-width: 200px !important;
+        max-width: 200px !important;
+    }
+    
+    .movies-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 12px !important;
+    }
+    
+    .section-header h2 {
+        font-size: 1.3rem !important;
+    }
+    
+    .search-bar {
+        max-width: 250px !important;
+    }
+    
+    .user-actions .icon-btn:first-child {
+        display: none !important;
+    }
+}
+
+/* Small Mobile (320px - 480px) */
+@media (max-width: 480px) {
+    .hero-section {
+        height: 250px !important;
+    }
+    
+    .hero-content {
+        max-width: 90% !important;
+        padding: 15px !important;
+    }
+    
+    .hero-title {
+        font-size: 1.3rem !important;
+        margin-bottom: 10px !important;
+    }
+    
+    .hero-description {
+        display: none !important;
+    }
+    
+    .hero-meta {
+        gap: 8px !important;
+    }
+    
+    .hero-actions {
+        gap: 8px !important;
+    }
+    
+    .watch-btn,
+    .add-to-watchlist-btn {
+        padding: 10px 16px !important;
+        font-size: 0.85rem !important;
+    }
+    
+    .add-to-watchlist-btn span {
+        display: none;
+    }
+    
+    .continue-card,
+    .recommend-card {
+        min-width: 180px !important;
+        max-width: 180px !important;
+    }
+    
+    .continue-poster,
+    .recommend-poster {
+        height: 240px !important;
+    }
+    
+    .movies-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px !important;
+    }
+    
+    .movie-poster {
+        height: 220px !important;
+    }
+    
+    .continue-section,
+    .recommendations-section,
+    .all-movies-section {
+        padding: 20px 15px !important;
+    }
+    
+    .section-header h2 {
+        font-size: 1.2rem !important;
+    }
+    
+    .top-bar {
+        padding: 10px 15px !important;
+    }
+    
+    .search-bar {
+        max-width: 200px !important;
+        margin: 0 10px !important;
+        padding: 8px 12px !important;
+    }
+    
+    .search-bar input {
+        font-size: 0.85rem !important;
+    }
+    
+    .user-avatar {
+        width: 32px !important;
+        height: 32px !important;
+    }
+    
+    .footer {
+        padding: 30px 15px 20px !important;
+    }
+    
+    .footer-links {
+        grid-template-columns: 1fr !important;
+        gap: 10px !important;
+    }
+    
+    .genre-filters {
+        gap: 8px !important;
+    }
+    
+    .genre-tag {
+        padding: 6px 12px !important;
+        font-size: 0.8rem !important;
+    }
+}
+
+/* Fix overflow issues */
+body {
+    overflow-x: hidden !important;
+}
+
+.main-content {
+    overflow-x: hidden !important;
+    max-width: 100vw;
+}
+
+* {
+    max-width: 100%;
+}
+
+/* Ensure sections don't overflow */
+.hero-section,
+.continue-section,
+.recommendations-section,
+.all-movies-section {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* Container max-width */
+.section-header,
+.genre-filters,
+.movies-grid,
+.continue-carousel-wrapper,
+.recommendations-carousel-wrapper {
+    max-width: 100%;
 }
